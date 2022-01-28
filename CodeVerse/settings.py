@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from decouple import config
-import os
+import os ,sys
 import django_heroku
 
 
@@ -28,6 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+
 
 ALLOWED_HOSTS = ['127.0.0.1','code-verse.herokuapp.com']
 
@@ -136,6 +137,13 @@ STATICFILES_DIRS = [
 ]
 MEDIA_ROOT = BASE_DIR /'static/images'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
+
+STATICFILES_STORAGE = (
+    'django.contrib.staticfiles.storage.StaticFilesStorage'
+    if TESTING
+    else 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
