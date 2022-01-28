@@ -20,3 +20,6 @@ git clone https://github.com/rajnishm990/CodeVerse.git
 ##### Running the App
 --> To run the App, we use :
     python manage.py runserver
+
+# deployment -
+https://code-verse.herokuapp.com/
